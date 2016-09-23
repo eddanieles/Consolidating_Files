@@ -6,6 +6,7 @@ class ExpenseCategories extends Component{
     super(props);
     this.state = {
       categories: [
+        ['My Expenses', 'Value'],
         ['Food', 0],
         ['Fun', 10],
         ['Housing', 20],
@@ -15,14 +16,9 @@ class ExpenseCategories extends Component{
         ['Utilities', 60]
         ],
       myArray: []
-  //TSCI = {name: 'Utilities',value: 60}
-  //TSCI => {name: 'Utilities',value: 37}
     }
   }
   handleChange(expense, index, event){
-    //console.log(expense.name + ", " + event.target.value);
-    //console.log(expense.value);
-    //console.log(index + ", " + this.state.categories[index].value);
     let newArray = this.state.categories.map((item, index) => {
         if (item[0] === expense[0]){
           return  [expense[0], parseInt(event.target.value, 10)];
@@ -40,6 +36,9 @@ class ExpenseCategories extends Component{
         state: 'categories',
         asArray: true
       })
+      // base.update(`${localStorage.UID}/test`, {
+      //   data: this.state.categories
+      // });
    }
   componentWillUnmount(){
     base.removeBinding(this.ref);
@@ -52,14 +51,14 @@ class ExpenseCategories extends Component{
   render () {
     return (
       <div>
-        {this.state.categories.map((expense, index) =>
-          <div className="expenses" key={index}>
-            <p>
-              <span>{expense[0]}</span>
-              <input type='range' min={0} max={100} step={5} onChange={this.handleChange.bind(this, expense, index)}/>
-              <span>{expense[1]}</span>
-            </p>
-          </div>
+        {this.state.categories.slice(1, this.state.categories.length).map((expense, index) =>
+            <div className="expenses" key={index}>
+              <p>
+                <span>{expense[0]}</span>
+                <input type='range' min={0} max={100} step={5} value={expense[1]} onChange={this.handleChange.bind(this, expense, index)}/>
+                <span>{expense[1]}</span>
+              </p>
+            </div>
         )}
         <button onClick={this.handleClick.bind(this)}>Click Me</button>
         {this.state.myArray}
