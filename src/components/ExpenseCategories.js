@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import base from '../config/base'
+import {Chart} from 'react-google-charts'
 
 class ExpenseCategories extends Component{
   constructor(props){
@@ -15,6 +16,12 @@ class ExpenseCategories extends Component{
         ['Transportation', 50],
         ['Utilities', 60]
         ],
+      options: {
+        backgroundColor: 'none',
+        is3D: true,
+        legend: {textStyle: {color: 'red'}},
+        titleTextStyle: {color: 'red'}
+      },
       myArray: []
     }
   }
@@ -28,7 +35,7 @@ class ExpenseCategories extends Component{
       }
     );
     this.setState({categories: newArray });
-    console.log(this.state.categories[index][1]);
+    console.log(this.state.categories[index+1][1]);
   }
   componentDidMount() {
       this.ref = base.syncState(`${localStorage.UID}/test`, {
@@ -51,6 +58,7 @@ class ExpenseCategories extends Component{
   render () {
     return (
       <div>
+        <Chart chartType="PieChart" data={this.state.categories} options={this.state.options} width={"100%"} height={"400px"} legend_toggle={true} />
         {this.state.categories.slice(1, this.state.categories.length).map((expense, index) =>
             <div className="expenses" key={index}>
               <p>
