@@ -12,7 +12,8 @@ class ExpenseCategories extends Component{
       loans: 30,
       miscellaneous: 40,
       transportation: 50,
-      utilities: 60
+      utilities: 60,
+      myArray: []
 
     }
   }
@@ -30,6 +31,11 @@ class ExpenseCategories extends Component{
   componentWillUnmount(){
     base.removeBinding(this.ref);
   }
+  handleClick(event){
+    let whatevs = this.state.myArray;
+    let whatevsNumber = this.state.myArray.length;
+    this.setState({myArray: whatevs.concat(whatevsNumber + 1)})
+  }
   render () {
     return (
       <div>
@@ -42,6 +48,8 @@ class ExpenseCategories extends Component{
             </p>
           </div>
         )}
+        <button onClick={this.handleClick.bind(this)}>Click Me</button>
+        {this.state.myArray}
       </div>
     )
   }
