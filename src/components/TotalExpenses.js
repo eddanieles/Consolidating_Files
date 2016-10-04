@@ -29,38 +29,19 @@ class TotalExpenses extends Component {
     render() {
         let runningTotalExpenses = this.state.myExpenses.slice(1, this.state.myExpenses.length).map(expense => expense[1]).reduce((total, current) => total + current);
         let surplus = this.state.income - runningTotalExpenses;
-        var styles = {
-            total: {
-                flexGrow: 1,
-                fontWeight: "bold",
-                height: "100%",
-                textAlign: "center",
-                backgroundColor: "#A4A5A9",
-                borderRadius: "5px",
-                margin: "10px"
-            },
-            footer: {
-                display: "inline-flex",
-                position: "absolute",
-                bottom: "10",
-                height: "60px",
-                backgroundColor: "transparent",
-                borderRadius: "5px"
-            }
-        }
         return (
-            <footer className="col-sm-9 col-sm-offset-1" style={styles.footer}>
-                <p style={styles.total}>Income:
+            <footer className="col-sm-9 col-sm-offset-1">
+                <p>Income:
                     <span>
                         { " $" + this.state.income}
                     </span>
                 </p>
-                <p style={styles.total}>Total Expenses:
+                <p>Total Expenses:
                     <span>
                         { " $" + runningTotalExpenses}
                     </span>
                 </p>
-                <p style={styles.total}>Surplus:
+                <p>Surplus:
                     <span>
                         {surplus < 0
                             ? " You don't make enough, Ass Hole!"
